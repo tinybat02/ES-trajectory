@@ -1,0 +1,21 @@
+{
+  "type": "panel",
+  "name": "ES Trajectory",
+  "id": "id-es-trajectory-panel",
+  "dataFormats": ["table"],
+  "info": {
+    "description": "Trajectory using openlayers for elasticsearch",
+    "author": {
+      "name": "Nam Le"
+    },
+    "keywords": ["openlayers", "trajectory", "elasticsearch"],
+    "screenshots": [],
+    "version": "0.0.1",
+    "updated": "2020-05-26"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "6.3.x",
+    "plugins": []
+  }
+}
