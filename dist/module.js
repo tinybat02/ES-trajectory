@@ -52209,6 +52209,15 @@ function (_super) {
         });
         var timeData = this.perDeviceTime[this.state.current];
         var uncertaintyData = this.perDeviceUncertainty[this.state.current];
+        this.map.getView().animate({
+          center: routeData[0],
+          duration: 2000
+        });
+
+        if (this.map.getView().getZoom() !== 16) {
+          this.map.getView().setZoom(16);
+        }
+
         this.setState({
           routeLength: routeData.length
         });

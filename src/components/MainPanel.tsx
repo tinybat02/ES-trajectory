@@ -193,6 +193,14 @@ export class MainPanel extends PureComponent<Props> {
         const timeData = this.perDeviceTime[this.state.current];
         const uncertaintyData = this.perDeviceUncertainty[this.state.current];
 
+        this.map.getView().animate({
+          center: routeData[0],
+          duration: 2000,
+        });
+        if (this.map.getView().getZoom() !== 16) {
+          this.map.getView().setZoom(16);
+        }
+
         this.setState({ routeLength: routeData.length });
 
         let totalRoute: Feature[] = [];
