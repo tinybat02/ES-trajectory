@@ -52208,15 +52208,13 @@ function (_super) {
           return Object(ol_proj__WEBPACK_IMPORTED_MODULE_6__["fromLonLat"])(coordinate);
         });
         var timeData = this.perDeviceTime[this.state.current];
-        var uncertaintyData = this.perDeviceUncertainty[this.state.current];
-        this.map.getView().animate({
-          center: routeData[0],
-          duration: 2000
-        });
-
-        if (this.map.getView().getZoom() !== 16) {
-          this.map.getView().setZoom(16);
-        }
+        var uncertaintyData = this.perDeviceUncertainty[this.state.current]; // this.map.getView().animate({
+        //   center: routeData[0],
+        //   duration: 2000,
+        // });
+        // if (this.map.getView().getZoom() !== 12) {
+        //   this.map.getView().setZoom(12);
+        // }
 
         this.setState({
           routeLength: routeData.length
