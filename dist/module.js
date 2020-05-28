@@ -52499,7 +52499,7 @@ var createPoint = function createPoint(routeData, routeRadiusData, iterRoute) {
   pointFeature.setStyle(new ol_style__WEBPACK_IMPORTED_MODULE_3__["Style"]({
     image: new ol_style__WEBPACK_IMPORTED_MODULE_3__["Circle"]({
       // radius: routeRadiusData[iterRoute] || 2,
-      radius: 3,
+      radius: 10,
       fill: new ol_style__WEBPACK_IMPORTED_MODULE_3__["Fill"]({
         color: 'rgba(73,168,222,0.6)'
       })

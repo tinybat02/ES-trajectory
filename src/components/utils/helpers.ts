@@ -60,7 +60,7 @@ export const createPoint = (routeData: Coordinate[], routeRadiusData: number[], 
     new Style({
       image: new Circle({
         // radius: routeRadiusData[iterRoute] || 2,
-        radius: 3,
+        radius: 10,
         fill: new Fill({ color: 'rgba(73,168,222,0.6)' }),
       }),
     })
