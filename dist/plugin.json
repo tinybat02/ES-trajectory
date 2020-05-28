@@ -11,7 +11,7 @@
     "keywords": ["openlayers", "trajectory", "elasticsearch"],
     "screenshots": [],
     "version": "0.0.1",
-    "updated": "2020-05-26"
+    "updated": "2020-05-28"
   },
 
   "dependencies": {

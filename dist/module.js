@@ -52208,7 +52208,8 @@ function (_super) {
           return Object(ol_proj__WEBPACK_IMPORTED_MODULE_6__["fromLonLat"])(coordinate);
         });
         var timeData = this.perDeviceTime[this.state.current];
-        var uncertaintyData = this.perDeviceUncertainty[this.state.current]; // this.map.getView().animate({
+        var uncertaintyData = this.perDeviceUncertainty[this.state.current];
+        console.log('routeData', routeData); // this.map.getView().animate({
         //   center: routeData[0],
         //   duration: 2000,
         // });
@@ -52497,7 +52498,8 @@ var createPoint = function createPoint(routeData, routeRadiusData, iterRoute) {
   var pointFeature = new ol_Feature__WEBPACK_IMPORTED_MODULE_0__["default"](new ol_geom_Point__WEBPACK_IMPORTED_MODULE_1__["default"](routeData[iterRoute]));
   pointFeature.setStyle(new ol_style__WEBPACK_IMPORTED_MODULE_3__["Style"]({
     image: new ol_style__WEBPACK_IMPORTED_MODULE_3__["Circle"]({
-      radius: routeRadiusData[iterRoute] || 2,
+      // radius: routeRadiusData[iterRoute] || 2,
+      radius: 3,
       fill: new ol_style__WEBPACK_IMPORTED_MODULE_3__["Fill"]({
         color: 'rgba(73,168,222,0.6)'
       })

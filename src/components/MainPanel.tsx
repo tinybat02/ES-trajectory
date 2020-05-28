@@ -193,6 +193,7 @@ export class MainPanel extends PureComponent<Props> {
         const timeData = this.perDeviceTime[this.state.current];
         const uncertaintyData = this.perDeviceUncertainty[this.state.current];
 
+        console.log('routeData', routeData);
         // this.map.getView().animate({
         //   center: routeData[0],
         //   duration: 2000,
