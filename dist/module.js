@@ -52062,7 +52062,6 @@ function (_super) {
         zoom_level = _a.zoom_level,
         center_lon = _a.center_lon,
         center_lat = _a.center_lat;
-    var buffer = this.props.data.series[0].fields[0].values.buffer;
     var carto = new ol_layer__WEBPACK_IMPORTED_MODULE_4__["Tile"]({
       source: new ol_source_XYZ__WEBPACK_IMPORTED_MODULE_3__["default"]({
         url: 'https://{1-4}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
@@ -52130,28 +52129,37 @@ function (_super) {
     });
     this.map.addInteraction(hoverInteraction);
 
-    var _b = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_12__["processDataES"])(buffer),
-        perDeviceRoute = _b.perDeviceRoute,
-        perDeviceTime = _b.perDeviceTime,
-        perDeviceUncertainty = _b.perDeviceUncertainty;
+    if (this.props.data.series.length > 0) {
+      var buffer = this.props.data.series[0].fields[0].values.buffer;
 
-    this.perDeviceRoute = perDeviceRoute;
-    this.perDeviceTime = perDeviceTime;
-    this.perDeviceUncertainty = perDeviceUncertainty;
-    this.setState({
-      options: Object.keys(this.perDeviceRoute)
-    });
+      var _b = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_12__["processDataES"])(buffer),
+          perDeviceRoute = _b.perDeviceRoute,
+          perDeviceTime = _b.perDeviceTime,
+          perDeviceUncertainty = _b.perDeviceUncertainty;
+
+      this.perDeviceRoute = perDeviceRoute;
+      this.perDeviceTime = perDeviceTime;
+      this.perDeviceUncertainty = perDeviceUncertainty;
+      this.setState({
+        options: Object.keys(this.perDeviceRoute)
+      });
+    }
   };
 
   MainPanel.prototype.componentDidUpdate = function (prevProps, prevState) {
     if (prevProps.data.series[0] !== this.props.data.series[0]) {
-      var buffer = this.props.data.series[0].fields[0].values.buffer;
       this.map.removeLayer(this.partialRoute);
       this.map.removeLayer(this.totalRoute);
       this.setState({
         options: [],
         current: 'None'
       });
+
+      if (this.props.data.series.length == 0) {
+        return;
+      }
+
+      var buffer = this.props.data.series[0].fields[0].values.buffer;
 
       if (buffer.length !== 0) {
         var _a = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_12__["processDataES"])(buffer),
@@ -52208,8 +52216,7 @@ function (_super) {
           return Object(ol_proj__WEBPACK_IMPORTED_MODULE_6__["fromLonLat"])(coordinate);
         });
         var timeData = this.perDeviceTime[this.state.current];
-        var uncertaintyData = this.perDeviceUncertainty[this.state.current];
-        console.log('routeData', routeData); // this.map.getView().animate({
+        var uncertaintyData = this.perDeviceUncertainty[this.state.current]; // this.map.getView().animate({
         //   center: routeData[0],
         //   duration: 2000,
         // });

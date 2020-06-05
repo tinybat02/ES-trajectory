@@ -52,7 +52,6 @@ export class MainPanel extends PureComponent<Props> {
 
   componentDidMount() {
     const { tile_url, zoom_level, center_lon, center_lat } = this.props.options;
-    const { buffer } = this.props.data.series[0].fields[0].values as Buffer;
 
     const carto = new TileLayer({
       source: new XYZ({
@@ -125,24 +124,29 @@ export class MainPanel extends PureComponent<Props> {
     });
     this.map.addInteraction(hoverInteraction);
 
-    const { perDeviceRoute, perDeviceTime, perDeviceUncertainty } = processDataES(buffer);
-    this.perDeviceRoute = perDeviceRoute;
-    this.perDeviceTime = perDeviceTime;
-    this.perDeviceUncertainty = perDeviceUncertainty;
-
-    this.setState({
-      options: Object.keys(this.perDeviceRoute),
-    });
+    if (this.props.data.series.length > 0) {
+      const { buffer } = this.props.data.series[0].fields[0].values as Buffer;
+      const { perDeviceRoute, perDeviceTime, perDeviceUncertainty } = processDataES(buffer);
+      this.perDeviceRoute = perDeviceRoute;
+      this.perDeviceTime = perDeviceTime;
+      this.perDeviceUncertainty = perDeviceUncertainty;
+      this.setState({
+        options: Object.keys(this.perDeviceRoute),
+      });
+    }
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (prevProps.data.series[0] !== this.props.data.series[0]) {
-      const { buffer } = this.props.data.series[0].fields[0].values as Buffer;
-
       this.map.removeLayer(this.partialRoute);
       this.map.removeLayer(this.totalRoute);
       this.setState({ options: [], current: 'None' });
 
+      if (this.props.data.series.length == 0) {
+        return;
+      }
+
+      const { buffer } = this.props.data.series[0].fields[0].values as Buffer;
       if (buffer.length !== 0) {
         const { perDeviceRoute, perDeviceTime, perDeviceUncertainty } = processDataES(buffer);
         this.perDeviceRoute = perDeviceRoute;
@@ -193,7 +197,6 @@ export class MainPanel extends PureComponent<Props> {
         const timeData = this.perDeviceTime[this.state.current];
         const uncertaintyData = this.perDeviceUncertainty[this.state.current];
 
-        console.log('routeData', routeData);
         // this.map.getView().animate({
         //   center: routeData[0],
         //   duration: 2000,
